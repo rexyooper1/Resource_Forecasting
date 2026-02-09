@@ -1,0 +1,234 @@
+[
+  {
+    "id": "proj-1",
+    "name": "HVAC System Modernization",
+    "client": "GSA Public Buildings Service",
+    "description": "Design and analysis of modernized HVAC systems for federal building retrofit, including energy modeling and mechanical system integration.",
+    "status": "preliminary",
+    "winProbability": 65,
+    "periodOfPerformance": {
+      "startDate": "2025-06-01",
+      "endDate": "2026-05-31"
+    },
+    "lcatRequirements": [
+      {
+        "id": "req-1",
+        "lcatId": "lcat-1",
+        "fteCount": 2,
+        "requiredSkills": ["skill-1", "skill-6", "skill-7"]
+      },
+      {
+        "id": "req-2",
+        "lcatId": "lcat-3",
+        "fteCount": 1,
+        "requiredSkills": ["skill-2", "skill-1"]
+      },
+      {
+        "id": "req-3",
+        "lcatId": "lcat-4",
+        "fteCount": 1,
+        "requiredSkills": ["skill-12", "skill-13"]
+      }
+    ],
+    "createdAt": "2025-01-15T10:00:00Z",
+    "updatedAt": "2025-01-15T10:00:00Z"
+  },
+  {
+    "id": "proj-2",
+    "name": "Naval Vessel Power Distribution",
+    "client": "NAVSEA",
+    "description": "Electrical power distribution system design for next-generation naval surface combatant, including power conversion and circuit protection.",
+    "status": "preliminary",
+    "winProbability": 45,
+    "periodOfPerformance": {
+      "startDate": "2025-09-01",
+      "endDate": "2026-08-31"
+    },
+    "lcatRequirements": [
+      {
+        "id": "req-4",
+        "lcatId": "lcat-2",
+        "fteCount": 3,
+        "requiredSkills": ["skill-9", "skill-10", "skill-5"]
+      },
+      {
+        "id": "req-5",
+        "lcatId": "lcat-4",
+        "fteCount": 1,
+        "requiredSkills": ["skill-12", "skill-13", "skill-11"]
+      }
+    ],
+    "createdAt": "2025-02-01T09:00:00Z",
+    "updatedAt": "2025-02-01T09:00:00Z"
+  },
+  {
+    "id": "proj-3",
+    "name": "UAV Structural Analysis",
+    "client": "AFRL",
+    "description": "Finite element analysis and structural optimization of unmanned aerial vehicle airframe for extended range operations.",
+    "status": "preliminary",
+    "winProbability": 70,
+    "periodOfPerformance": {
+      "startDate": "2025-07-01",
+      "endDate": "2026-06-30"
+    },
+    "lcatRequirements": [
+      {
+        "id": "req-6",
+        "lcatId": "lcat-1",
+        "fteCount": 2,
+        "requiredSkills": ["skill-6", "skill-7", "skill-3", "skill-1"]
+      },
+      {
+        "id": "req-7",
+        "lcatId": "lcat-3",
+        "fteCount": 1,
+        "requiredSkills": ["skill-1", "skill-2", "skill-8"]
+      }
+    ],
+    "createdAt": "2025-01-20T14:00:00Z",
+    "updatedAt": "2025-01-20T14:00:00Z"
+  },
+  {
+    "id": "proj-4",
+    "name": "Satellite Ground Station Upgrade",
+    "client": "NASA Goddard",
+    "description": "Upgrade of satellite ground station electronics including antenna feed systems, signal processing hardware, and power conditioning.",
+    "status": "proposal_submitted",
+    "winProbability": 55,
+    "periodOfPerformance": {
+      "startDate": "2025-10-01",
+      "endDate": "2026-09-30"
+    },
+    "lcatRequirements": [
+      {
+        "id": "req-8",
+        "lcatId": "lcat-2",
+        "fteCount": 2,
+        "requiredSkills": ["skill-9", "skill-5", "skill-4"]
+      },
+      {
+        "id": "req-9",
+        "lcatId": "lcat-1",
+        "fteCount": 1,
+        "requiredSkills": ["skill-1", "skill-8"]
+      },
+      {
+        "id": "req-10",
+        "lcatId": "lcat-5",
+        "fteCount": 1,
+        "requiredSkills": ["skill-14", "skill-15"]
+      }
+    ],
+    "createdAt": "2024-12-10T11:00:00Z",
+    "updatedAt": "2025-01-28T16:30:00Z"
+  },
+  {
+    "id": "proj-5",
+    "name": "Armored Vehicle Thermal Management",
+    "client": "US Army DEVCOM",
+    "description": "Thermal analysis and cooling system design for next-generation armored vehicle electronics suite and power train.",
+    "status": "preliminary",
+    "winProbability": 35,
+    "periodOfPerformance": {
+      "startDate": "2026-01-01",
+      "endDate": "2026-12-31"
+    },
+    "lcatRequirements": [
+      {
+        "id": "req-11",
+        "lcatId": "lcat-1",
+        "fteCount": 2,
+        "requiredSkills": ["skill-6", "skill-7", "skill-1", "skill-8"]
+      },
+      {
+        "id": "req-12",
+        "lcatId": "lcat-2",
+        "fteCount": 1,
+        "requiredSkills": ["skill-9", "skill-10"]
+      },
+      {
+        "id": "req-13",
+        "lcatId": "lcat-4",
+        "fteCount": 1,
+        "requiredSkills": ["skill-12", "skill-11"]
+      }
+    ],
+    "createdAt": "2025-02-05T08:00:00Z",
+    "updatedAt": "2025-02-05T08:00:00Z"
+  },
+  {
+    "id": "proj-6",
+    "name": "Renewable Energy Microgrid Design",
+    "client": "DOE Office of Electricity",
+    "description": "Design of hybrid renewable energy microgrid for remote military installation including solar, wind, and battery storage integration.",
+    "status": "proposal_submitted",
+    "winProbability": 80,
+    "periodOfPerformance": {
+      "startDate": "2025-08-01",
+      "endDate": "2026-07-31"
+    },
+    "lcatRequirements": [
+      {
+        "id": "req-14",
+        "lcatId": "lcat-2",
+        "fteCount": 2,
+        "requiredSkills": ["skill-10", "skill-9", "skill-4"]
+      },
+      {
+        "id": "req-15",
+        "lcatId": "lcat-1",
+        "fteCount": 1,
+        "requiredSkills": ["skill-1", "skill-6"]
+      },
+      {
+        "id": "req-16",
+        "lcatId": "lcat-5",
+        "fteCount": 1,
+        "requiredSkills": ["skill-14", "skill-15", "skill-13"]
+      }
+    ],
+    "createdAt": "2024-11-20T10:00:00Z",
+    "updatedAt": "2025-01-15T09:00:00Z"
+  },
+  {
+    "id": "proj-7",
+    "name": "Submarine Hull Inspection Robot",
+    "client": "NAVSEA",
+    "description": "Design and prototyping of autonomous underwater robot for submarine hull inspection, including mechanical structure, embedded electronics, and control software.",
+    "status": "awarded",
+    "winProbability": 90,
+    "periodOfPerformance": {
+      "startDate": "2025-04-01",
+      "endDate": "2026-03-31"
+    },
+    "lcatRequirements": [
+      {
+        "id": "req-17",
+        "lcatId": "lcat-1",
+        "fteCount": 2,
+        "requiredSkills": ["skill-1", "skill-7", "skill-8", "skill-6"]
+      },
+      {
+        "id": "req-18",
+        "lcatId": "lcat-2",
+        "fteCount": 2,
+        "requiredSkills": ["skill-5", "skill-9", "skill-4"]
+      },
+      {
+        "id": "req-19",
+        "lcatId": "lcat-3",
+        "fteCount": 1,
+        "requiredSkills": ["skill-1", "skill-2"]
+      },
+      {
+        "id": "req-20",
+        "lcatId": "lcat-4",
+        "fteCount": 1,
+        "requiredSkills": ["skill-12", "skill-13", "skill-11"]
+      }
+    ],
+    "createdAt": "2024-10-01T08:00:00Z",
+    "updatedAt": "2025-02-01T12:00:00Z"
+  }
+]

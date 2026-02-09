@@ -1,0 +1,7 @@
+[
+  { "id": "lcat-1", "name": "Mechanical Engineer", "description": "Designs and analyzes mechanical systems and components" },
+  { "id": "lcat-2", "name": "Electrical Engineer", "description": "Designs electrical systems, circuits, and power distribution" },
+  { "id": "lcat-3", "name": "Designer", "description": "Creates technical drawings, 3D models, and design documentation" },
+  { "id": "lcat-4", "name": "Project Manager", "description": "Manages project timelines, budgets, and team coordination" },
+  { "id": "lcat-5", "name": "BD Program Manager", "description": "Manages business development and capture activities" }
+]
