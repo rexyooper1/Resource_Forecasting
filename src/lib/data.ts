@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { Project, Employee, LCAT, Skill } from "@/types";
+import { Project, Employee, LCAT, Skill, Assignment } from "@/types";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 
@@ -45,3 +45,8 @@ export function saveLCATs(lcats: LCAT[]): void { writeJsonFile("lcats.json", lca
 export function getSkills(): Skill[] { return readJsonFile<Skill>("skills.json"); }
 export function getSkill(id: string): Skill | undefined { return getSkills().find(s => s.id === id); }
 export function saveSkills(skills: Skill[]): void { writeJsonFile("skills.json", skills); }
+
+// Assignments
+export function getAssignments(): Assignment[] { return readJsonFile<Assignment>("assignments.json"); }
+export function getAssignment(id: string): Assignment | undefined { return getAssignments().find(a => a.id === id); }
+export function saveAssignments(assignments: Assignment[]): void { writeJsonFile("assignments.json", assignments); }

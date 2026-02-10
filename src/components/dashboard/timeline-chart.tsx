@@ -1,6 +1,6 @@
 "use client";
 
-import { Project, Employee, LCAT } from "@/types";
+import { Project, Employee, LCAT, Assignment } from "@/types";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import {
   AreaChart,
@@ -26,6 +26,7 @@ interface TimelineChartProps {
   projects: Project[];
   lcats: LCAT[];
   employees: Employee[];
+  assignments: Assignment[];
 }
 
 const AREA_COLORS = [
@@ -41,12 +42,12 @@ const AREA_COLORS = [
   "#84cc16",
 ];
 
-export function TimelineChart({ projects, lcats, employees }: TimelineChartProps) {
+export function TimelineChart({ projects, lcats, employees, assignments }: TimelineChartProps) {
   const activeProjects = projects.filter(
     (p) => p.status === "preliminary" || p.status === "proposal_submitted"
   );
 
-  const totalCapacity = getTotalCapacity(employees);
+  const totalCapacity = getTotalCapacity(employees, assignments);
 
   // Determine which LCATs are actually used in active projects
   const usedLcatIds = new Set<string>();

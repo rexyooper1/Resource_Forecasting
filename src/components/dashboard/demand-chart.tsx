@@ -1,6 +1,6 @@
 "use client";
 
-import { Project, Employee, LCAT } from "@/types";
+import { Project, Employee, LCAT, Assignment } from "@/types";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { calculateCapacityByLCAT } from "@/lib/capacity";
 import {
@@ -19,10 +19,11 @@ interface DemandChartProps {
   projects: Project[];
   lcats: LCAT[];
   employees: Employee[];
+  assignments: Assignment[];
 }
 
-export function DemandChart({ projects, lcats, employees }: DemandChartProps) {
-  const capacityData = calculateCapacityByLCAT(projects, employees, lcats);
+export function DemandChart({ projects, lcats, employees, assignments }: DemandChartProps) {
+  const capacityData = calculateCapacityByLCAT(projects, employees, lcats, assignments);
 
   const chartData = capacityData.map((row) => {
     const gap = row.capacityFte - row.weightedDemandFte;

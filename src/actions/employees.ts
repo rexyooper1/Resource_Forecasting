@@ -2,14 +2,13 @@
 
 import { revalidatePath } from "next/cache";
 import { v4 as uuidv4 } from "uuid";
-import { getEmployees, saveEmployees } from "@/lib/data";
+import { getEmployees, saveEmployees, getAssignments, saveAssignments } from "@/lib/data";
 import { Employee } from "@/types";
 
 export interface EmployeeFormData {
   name: string;
   lcatId: string;
   skills: string[];
-  availability: number;
 }
 
 export async function createEmployee(data: EmployeeFormData) {
@@ -19,7 +18,6 @@ export async function createEmployee(data: EmployeeFormData) {
     name: data.name,
     lcatId: data.lcatId,
     skills: data.skills,
-    availability: data.availability,
   };
   employees.push(newEmployee);
   saveEmployees(employees);
@@ -38,7 +36,6 @@ export async function updateEmployee(id: string, data: EmployeeFormData) {
     name: data.name,
     lcatId: data.lcatId,
     skills: data.skills,
-    availability: data.availability,
   };
   saveEmployees(employees);
   revalidatePath("/employees");
@@ -50,6 +47,12 @@ export async function deleteEmployee(id: string) {
   const employees = getEmployees();
   const filtered = employees.filter((e) => e.id !== id);
   saveEmployees(filtered);
+
+  const assignments = getAssignments();
+  const filteredAssignments = assignments.filter((a) => a.employeeId !== id);
+  saveAssignments(filteredAssignments);
+
   revalidatePath("/employees");
   revalidatePath("/matching");
+  revalidatePath("/dashboard");
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Project, Employee, LCAT } from "@/types";
+import { Project, Employee, LCAT, Assignment } from "@/types";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { calculateCapacityByLCAT } from "@/lib/capacity";
@@ -9,6 +9,7 @@ interface StaffingGapTableProps {
   projects: Project[];
   employees: Employee[];
   lcats: LCAT[];
+  assignments: Assignment[];
 }
 
 function getStatusBadge(gap: number) {
@@ -28,8 +29,9 @@ export function StaffingGapTable({
   projects,
   employees,
   lcats,
+  assignments,
 }: StaffingGapTableProps) {
-  const capacityData = calculateCapacityByLCAT(projects, employees, lcats);
+  const capacityData = calculateCapacityByLCAT(projects, employees, lcats, assignments);
   const sorted = [...capacityData].sort((a, b) => a.gapFte - b.gapFte);
 
   const totals = sorted.reduce(

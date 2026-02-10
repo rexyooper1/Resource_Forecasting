@@ -1,6 +1,6 @@
 "use client";
 
-import { Project, Employee, LCAT } from "@/types";
+import { Project, Employee, LCAT, Assignment } from "@/types";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { FolderKanban, Users, TrendingUp, CheckCircle } from "lucide-react";
 import { calculateCapacityByLCAT } from "@/lib/capacity";
@@ -9,16 +9,17 @@ interface DemandSummaryProps {
   projects: Project[];
   employees: Employee[];
   lcats: LCAT[];
+  assignments: Assignment[];
 }
 
-export function DemandSummary({ projects, employees, lcats }: DemandSummaryProps) {
+export function DemandSummary({ projects, employees, lcats, assignments }: DemandSummaryProps) {
   const activeProjects = projects.filter(
     (p) => p.status === "preliminary" || p.status === "proposal_submitted"
   );
 
   const totalPreliminary = activeProjects.length;
 
-  const capacityData = calculateCapacityByLCAT(projects, employees, lcats);
+  const capacityData = calculateCapacityByLCAT(projects, employees, lcats, assignments);
 
   const totalFteDemand = capacityData.reduce(
     (sum, c) => sum + c.rawDemandFte,

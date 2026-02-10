@@ -1,4 +1,4 @@
-import { getProjects, getEmployees, getLCATs, getSkills } from "@/lib/data";
+import { getProjects, getEmployees, getLCATs, getSkills, getAssignments } from "@/lib/data";
 import { Header } from "@/components/layout/header";
 import { SkillMatchTable } from "@/components/matching/skill-match-table";
 
@@ -7,6 +7,7 @@ export default function MatchingPage() {
   const employees = getEmployees();
   const lcats = getLCATs();
   const skills = getSkills();
+  const assignments = getAssignments();
 
   return (
     <div>
@@ -20,6 +21,7 @@ export default function MatchingPage() {
           employees={employees}
           lcats={lcats}
           skills={skills}
+          assignments={assignments}
         />
       </div>
     </div>

@@ -1,5 +1,6 @@
-import { Project, Employee, LCAT } from "@/types";
+import { Project, Employee, LCAT, Assignment } from "@/types";
 import { startOfMonth, addMonths, isBefore, isAfter, parseISO } from "date-fns";
+import { getCurrentAvailabilityFte } from "@/lib/availability";
 
 export interface LCATCapacity {
   lcatId: string;
@@ -20,7 +21,8 @@ function projectOverlapsMonth(project: Project, monthStart: Date, monthEnd: Date
 export function calculateCapacityByLCAT(
   projects: Project[],
   employees: Employee[],
-  lcats: LCAT[]
+  lcats: LCAT[],
+  assignments: Assignment[]
 ): LCATCapacity[] {
   const activeProjects = projects.filter(
     (p) => p.status === "preliminary" || p.status === "proposal_submitted"
@@ -36,7 +38,10 @@ export function calculateCapacityByLCAT(
 
   return lcats.map((lcat) => {
     const lcatEmployees = employees.filter((e) => e.lcatId === lcat.id);
-    const capacityFte = lcatEmployees.reduce((sum, e) => sum + e.availability, 0);
+    const capacityFte = lcatEmployees.reduce(
+      (sum, e) => sum + getCurrentAvailabilityFte(e.id, assignments),
+      0
+    );
 
     let totalRaw = 0;
     let totalWeighted = 0;
@@ -68,21 +73,24 @@ export function calculateCapacityByLCAT(
   });
 }
 
-export function getTotalCapacity(employees: Employee[]): number {
+export function getTotalCapacity(employees: Employee[], assignments: Assignment[]): number {
   return parseFloat(
-    employees.reduce((sum, e) => sum + e.availability, 0).toFixed(2)
+    employees
+      .reduce((sum, e) => sum + getCurrentAvailabilityFte(e.id, assignments), 0)
+      .toFixed(2)
   );
 }
 
 export function getOverallUtilization(
   projects: Project[],
   employees: Employee[],
-  lcats: LCAT[]
+  lcats: LCAT[],
+  assignments: Assignment[]
 ): number {
-  const capacity = getTotalCapacity(employees);
+  const capacity = getTotalCapacity(employees, assignments);
   if (capacity === 0) return 0;
 
-  const capacityData = calculateCapacityByLCAT(projects, employees, lcats);
+  const capacityData = calculateCapacityByLCAT(projects, employees, lcats, assignments);
   const totalWeightedDemand = capacityData.reduce(
     (sum, c) => sum + c.weightedDemandFte,
     0

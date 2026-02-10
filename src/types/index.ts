@@ -41,5 +41,15 @@ export interface Employee {
   name: string;
   lcatId: string;
   skills: string[];
-  availability: number;
+}
+
+export interface Assignment {
+  id: string;
+  employeeId: string;
+  projectId: string;
+  lcatRequirementId: string;
+  hoursPerWeek: number;
+  startDate: string;
+  endDate: string;
+  createdAt: string;
 }

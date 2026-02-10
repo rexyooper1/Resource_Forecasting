@@ -1,4 +1,4 @@
-import { getEmployees, getLCATs, getSkills } from "@/lib/data";
+import { getEmployees, getLCATs, getAssignments } from "@/lib/data";
 import { Header } from "@/components/layout/header";
 import { EmployeeTable } from "@/components/employees/employee-table";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function EmployeesPage() {
   const employees = getEmployees();
   const lcats = getLCATs();
-  const skills = getSkills();
+  const assignments = getAssignments();
 
   return (
     <div>
@@ -31,7 +31,7 @@ export default function EmployeesPage() {
           <EmployeeTable
             employees={employees}
             lcats={lcats}
-            skills={skills}
+            assignments={assignments}
           />
         )}
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Project, Employee, LCAT } from "@/types";
+import { Project, Employee, LCAT, Assignment } from "@/types";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Gauge, TrendingDown, TrendingUp, Users } from "lucide-react";
 import {
@@ -13,16 +13,18 @@ interface CapacitySummaryProps {
   projects: Project[];
   employees: Employee[];
   lcats: LCAT[];
+  assignments: Assignment[];
 }
 
 export function CapacitySummary({
   projects,
   employees,
   lcats,
+  assignments,
 }: CapacitySummaryProps) {
-  const capacityData = calculateCapacityByLCAT(projects, employees, lcats);
-  const totalCapacity = getTotalCapacity(employees);
-  const utilization = getOverallUtilization(projects, employees, lcats);
+  const capacityData = calculateCapacityByLCAT(projects, employees, lcats, assignments);
+  const totalCapacity = getTotalCapacity(employees, assignments);
+  const utilization = getOverallUtilization(projects, employees, lcats, assignments);
 
   const mostCritical = [...capacityData].sort((a, b) => a.gapFte - b.gapFte)[0];
   const largestSurplus = [...capacityData].sort((a, b) => b.gapFte - a.gapFte)[0];

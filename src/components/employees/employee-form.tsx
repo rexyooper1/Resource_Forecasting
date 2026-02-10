@@ -20,7 +20,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
 
 interface EmployeeFormProps {
   employee?: Employee;
@@ -36,9 +35,6 @@ export function EmployeeForm({ employee, lcats, skills }: EmployeeFormProps) {
   const [lcatId, setLcatId] = useState(employee?.lcatId ?? "");
   const [selectedSkills, setSelectedSkills] = useState<string[]>(
     employee?.skills ?? []
-  );
-  const [availability, setAvailability] = useState(
-    employee?.availability ?? 1.0
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -72,7 +68,6 @@ export function EmployeeForm({ employee, lcats, skills }: EmployeeFormProps) {
         name,
         lcatId,
         skills: selectedSkills,
-        availability,
       };
 
       if (isEditing && employee) {
@@ -159,26 +154,6 @@ export function EmployeeForm({ employee, lcats, skills }: EmployeeFormProps) {
                   )
                 )
               )}
-            </div>
-          </div>
-
-          {/* Availability */}
-          <div className="space-y-2">
-            <Label htmlFor="availability">
-              Availability: {Math.round(availability * 100)}%
-            </Label>
-            <Slider
-              id="availability"
-              min={0}
-              max={1}
-              step={0.05}
-              value={[availability]}
-              onValueChange={(value) => setAvailability(value[0])}
-            />
-            <div className="flex justify-between text-xs text-muted-foreground">
-              <span>0%</span>
-              <span>50%</span>
-              <span>100%</span>
             </div>
           </div>
 
