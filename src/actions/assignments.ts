@@ -49,6 +49,7 @@ export async function createAssignment(data: CreateAssignmentData) {
   revalidatePath("/matching");
   revalidatePath("/employees");
   revalidatePath("/dashboard");
+  revalidatePath(`/projects/${data.projectId}`);
   return newAssignment;
 }
 
@@ -62,5 +63,6 @@ export async function deleteAssignment(id: string) {
   revalidatePath("/dashboard");
   if (assignment) {
     revalidatePath(`/employees/${assignment.employeeId}`);
+    revalidatePath(`/projects/${assignment.projectId}`);
   }
 }
