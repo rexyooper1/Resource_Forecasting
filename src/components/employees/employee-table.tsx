@@ -62,7 +62,9 @@ export function EmployeeTable({ employees, lcats, assignments }: EmployeeTablePr
             return (
               <TableRow key={employee.id}>
                 <TableCell className="font-medium sticky left-0 bg-background z-10">
-                  {employee.name}
+                  <Link href={`/employees/${employee.id}`} className="text-primary hover:underline">
+                    {employee.name}
+                  </Link>
                 </TableCell>
                 <TableCell>{getLCATName(employee.lcatId)}</TableCell>
                 {weeks.map((week) => (

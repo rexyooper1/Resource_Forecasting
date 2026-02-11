@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": "3a1348a8-77dc-45bb-9458-ad786db791f0",
+    "employeeId": "emp-5",
+    "projectId": "proj-4",
+    "lcatRequirementId": "req-8",
+    "hoursPerWeek": 40,
+    "startDate": "2025-10-01",
+    "endDate": "2026-09-30",
+    "createdAt": "2026-02-11T14:48:25.539Z"
+  },
+  {
+    "id": "bad4dba1-e5ef-40e1-8a08-1a136740a031",
+    "employeeId": "emp-6",
+    "projectId": "proj-4",
+    "lcatRequirementId": "req-8",
+    "hoursPerWeek": 40,
+    "startDate": "2025-10-01",
+    "endDate": "2026-09-30",
+    "createdAt": "2026-02-11T14:48:27.015Z"
+  }
+]

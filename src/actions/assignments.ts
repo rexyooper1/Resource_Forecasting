@@ -54,9 +54,13 @@ export async function createAssignment(data: CreateAssignmentData) {
 
 export async function deleteAssignment(id: string) {
   const assignments = getAssignments();
+  const assignment = assignments.find((a) => a.id === id);
   const filtered = assignments.filter((a) => a.id !== id);
   saveAssignments(filtered);
   revalidatePath("/matching");
   revalidatePath("/employees");
   revalidatePath("/dashboard");
+  if (assignment) {
+    revalidatePath(`/employees/${assignment.employeeId}`);
+  }
 }
