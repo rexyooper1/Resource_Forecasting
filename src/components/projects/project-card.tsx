@@ -20,6 +20,7 @@ const statusColors: Record<Project["status"], string> = {
   preliminary: "bg-yellow-100 text-yellow-800 border-yellow-300",
   proposal_submitted: "bg-blue-100 text-blue-800 border-blue-300",
   awarded: "bg-green-100 text-green-800 border-green-300",
+  staffed: "bg-purple-100 text-purple-800 border-purple-300",
   lost: "bg-red-100 text-red-800 border-red-300",
 };
 
@@ -27,6 +28,7 @@ const statusLabels: Record<Project["status"], string> = {
   preliminary: "Preliminary",
   proposal_submitted: "Proposal Submitted",
   awarded: "Awarded",
+  staffed: "Staffed",
   lost: "Lost",
 };
 

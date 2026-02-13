@@ -18,5 +18,65 @@
     "startDate": "2025-10-01",
     "endDate": "2026-09-30",
     "createdAt": "2026-02-11T14:48:27.015Z"
+  },
+  {
+    "id": "7e01bc67-9511-49d7-9750-4018fd7ab923",
+    "employeeId": "emp-1",
+    "projectId": "proj-1",
+    "lcatRequirementId": "req-1",
+    "hoursPerWeek": 40,
+    "startDate": "2025-06-01",
+    "endDate": "2026-05-31",
+    "createdAt": "2026-02-11T15:09:15.999Z"
+  },
+  {
+    "id": "f1b3b56c-3519-4272-b0e4-cd83de1d6585",
+    "employeeId": "emp-3",
+    "projectId": "proj-1",
+    "lcatRequirementId": "req-1",
+    "hoursPerWeek": 40,
+    "startDate": "2025-06-01",
+    "endDate": "2026-05-31",
+    "createdAt": "2026-02-11T15:09:18.496Z"
+  },
+  {
+    "id": "97004edb-0c31-48f2-84dd-d2edd8d57897",
+    "employeeId": "emp-2",
+    "projectId": "proj-7",
+    "lcatRequirementId": "req-17",
+    "hoursPerWeek": 40,
+    "startDate": "2025-04-01",
+    "endDate": "2026-03-31",
+    "createdAt": "2026-02-11T18:18:50.242Z"
+  },
+  {
+    "id": "3ccb1a93-ec0e-439f-a4bd-41ddbf7b088b",
+    "employeeId": "emp-7",
+    "projectId": "proj-7",
+    "lcatRequirementId": "req-17",
+    "hoursPerWeek": 40,
+    "startDate": "2025-04-01",
+    "endDate": "2026-03-31",
+    "createdAt": "2026-02-11T18:18:53.259Z"
+  },
+  {
+    "id": "0e6a560c-d529-449e-ad93-dab86167a412",
+    "employeeId": "emp-8",
+    "projectId": "proj-1",
+    "lcatRequirementId": "req-2",
+    "hoursPerWeek": 40,
+    "startDate": "2025-06-01",
+    "endDate": "2026-05-31",
+    "createdAt": "2026-02-13T19:26:53.702Z"
+  },
+  {
+    "id": "062b053a-1a47-4555-b1a0-a68cda3a4d70",
+    "employeeId": "emp-9",
+    "projectId": "proj-1",
+    "lcatRequirementId": "req-3",
+    "hoursPerWeek": 40,
+    "startDate": "2025-06-01",
+    "endDate": "2026-05-31",
+    "createdAt": "2026-02-13T19:27:04.087Z"
   }
 ]

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   FolderKanban,
+  ClipboardList,
   Users,
   Puzzle,
   Settings,
@@ -18,6 +19,7 @@ import { useState, useEffect } from "react";
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard, roles: ["bd_manager", "eng_manager", "engineer"] as UserRole[] },
   { name: "Projects", href: "/projects", icon: FolderKanban, roles: ["bd_manager", "eng_manager", "engineer"] as UserRole[] },
+  { name: "Demand", href: "/demand", icon: ClipboardList, roles: ["eng_manager"] as UserRole[] },
   { name: "Employees", href: "/employees", icon: Users, roles: ["eng_manager"] as UserRole[] },
   { name: "Matching", href: "/matching", icon: Puzzle, roles: ["eng_manager"] as UserRole[] },
   { name: "Settings", href: "/settings", icon: Settings, roles: ["eng_manager"] as UserRole[] },

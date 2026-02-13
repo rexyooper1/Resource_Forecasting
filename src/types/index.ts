@@ -1,4 +1,4 @@
-export type ProjectStatus = "preliminary" | "proposal_submitted" | "awarded" | "lost";
+export type ProjectStatus = "preliminary" | "proposal_submitted" | "awarded" | "staffed" | "lost";
 export type UserRole = "bd_manager" | "eng_manager" | "engineer";
 
 export interface Project {

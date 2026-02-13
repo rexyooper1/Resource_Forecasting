@@ -32,6 +32,10 @@ const statusConfig: Record<
     label: "Awarded",
     className: "bg-green-500/20 text-green-400 border-green-500/30",
   },
+  staffed: {
+    label: "Staffed",
+    className: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+  },
   lost: {
     label: "Lost",
     className: "bg-red-500/20 text-red-400 border-red-500/30",
@@ -42,6 +46,7 @@ const statusOrder: ProjectStatus[] = [
   "preliminary",
   "proposal_submitted",
   "awarded",
+  "staffed",
   "lost",
 ];
 

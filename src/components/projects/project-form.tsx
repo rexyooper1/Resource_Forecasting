@@ -134,6 +134,7 @@ export function ProjectForm({ project, lcats, skills }: ProjectFormProps) {
                   Proposal Submitted
                 </SelectItem>
                 <SelectItem value="awarded">Awarded</SelectItem>
+                <SelectItem value="staffed">Staffed</SelectItem>
                 <SelectItem value="lost">Lost</SelectItem>
               </SelectContent>
             </Select>

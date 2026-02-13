@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getProjects } from "@/lib/data";
+import { getProjects, getAssignments } from "@/lib/data";
 import { Header } from "@/components/layout/header";
 import { ProjectList } from "@/components/projects/project-list";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,7 @@ import { Plus } from "lucide-react";
 
 export default function ProjectsPage() {
   const projects = getProjects();
+  const assignments = getAssignments();
 
   return (
     <div>
@@ -22,7 +23,7 @@ export default function ProjectsPage() {
         }
       />
       <div className="p-6">
-        <ProjectList projects={projects} />
+        <ProjectList projects={projects} assignments={assignments} />
       </div>
     </div>
   );

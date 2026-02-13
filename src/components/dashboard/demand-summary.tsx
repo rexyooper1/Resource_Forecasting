@@ -35,6 +35,10 @@ export function DemandSummary({ projects, employees, lcats, assignments }: Deman
     (p) => p.status === "awarded"
   ).length;
 
+  const staffedProjects = projects.filter(
+    (p) => p.status === "staffed"
+  ).length;
+
   const cards = [
     {
       title: "Total Preliminary Projects",
@@ -65,6 +69,17 @@ export function DemandSummary({ projects, employees, lcats, assignments }: Deman
       iconColor: "text-emerald-500",
     },
   ];
+
+  // If there are staffed projects, add a card for them
+  if (staffedProjects > 0) {
+    cards.push({
+      title: "Staffed Projects",
+      value: staffedProjects,
+      subtitle: "Resources allocated",
+      icon: CheckCircle,
+      iconColor: "text-purple-500",
+    });
+  }
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
