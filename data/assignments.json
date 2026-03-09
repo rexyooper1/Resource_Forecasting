@@ -78,5 +78,15 @@
     "startDate": "2025-06-01",
     "endDate": "2026-05-31",
     "createdAt": "2026-02-13T19:27:04.087Z"
+  },
+  {
+    "id": "d20b4bac-7902-4be0-bec0-9b5cb43ee2ba",
+    "employeeId": "emp-4",
+    "projectId": "proj-2",
+    "lcatRequirementId": "req-4",
+    "hoursPerWeek": 40,
+    "startDate": "2025-09-01",
+    "endDate": "2026-08-31",
+    "createdAt": "2026-03-06T16:42:06.300Z"
   }
 ]
