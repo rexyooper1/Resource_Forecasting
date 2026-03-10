@@ -100,7 +100,9 @@ export function RequirementMatchingCard({
     setLoading(null);
   };
 
-  const matches = matchEmployeesToRequirement(employees, requirement);
+  const matches = matchEmployeesToRequirement(employees, requirement).filter(
+    (m) => m.lcatMatch
+  );
   const gaps = getSkillGaps(employees, requirement);
   const assignedCount = getAssignedCount();
   const isFullyStaffed = assignedCount >= Math.ceil(requirement.fteCount);
@@ -135,9 +137,9 @@ export function RequirementMatchingCard({
 
       {isExpanded && (
         <CardContent>
-          {employees.length === 0 ? (
+          {matches.length === 0 ? (
             <p className="text-sm text-muted-foreground">
-              No employees available for matching.
+              No employees with a matching LCAT.
             </p>
           ) : (
             <div className="overflow-x-auto">
@@ -145,7 +147,6 @@ export function RequirementMatchingCard({
                 <TableHeader>
                   <TableRow>
                     <TableHead>Employee</TableHead>
-                    <TableHead>LCAT Match</TableHead>
                     <TableHead>Skills Matched</TableHead>
                     <TableHead>Match Score</TableHead>
                     <TableHead>Matched Skills</TableHead>
@@ -173,17 +174,6 @@ export function RequirementMatchingCard({
                               {availabilityPct}% available
                             </span>
                           </div>
-                        </TableCell>
-                        <TableCell>
-                          {match.lcatMatch ? (
-                            <span className="text-green-600 font-bold">
-                              &#10003;
-                            </span>
-                          ) : (
-                            <span className="text-red-500 font-bold">
-                              &#10005;
-                            </span>
-                          )}
                         </TableCell>
                         <TableCell>
                           {match.totalRequiredSkills > 0
