@@ -68,6 +68,7 @@ export function DemandChart({ projects, lcats, employees, assignments }: DemandC
                 dataKey="name"
                 tick={{ fill: "#888", fontSize: 12 }}
                 stroke="#888"
+                interval={0}
               />
               <YAxis tick={{ fill: "#888" }} stroke="#888" />
               <Tooltip
