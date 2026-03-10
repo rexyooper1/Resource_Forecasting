@@ -3,13 +3,14 @@
 import { revalidatePath } from "next/cache";
 import { v4 as uuidv4 } from "uuid";
 import { getProjects, saveProjects, getAssignments, saveAssignments } from "@/lib/data";
-import { Project, ProjectStatus } from "@/types";
+import { Project, ProjectStatus, ProjectPriority } from "@/types";
 
 export interface ProjectFormData {
   name: string;
   client: string;
   description: string;
   status: ProjectStatus;
+  priority?: ProjectPriority;
   winProbability: number;
   startDate: string;
   endDate: string;
@@ -29,6 +30,7 @@ export async function createProject(data: ProjectFormData) {
     client: data.client,
     description: data.description,
     status: data.status,
+    priority: data.priority,
     winProbability: data.winProbability,
     periodOfPerformance: {
       startDate: data.startDate,
@@ -90,6 +92,7 @@ export async function updateProject(id: string, data: ProjectFormData) {
     client: data.client,
     description: data.description,
     status: data.status,
+    priority: data.priority,
     winProbability: data.winProbability,
     periodOfPerformance: {
       startDate: data.startDate,

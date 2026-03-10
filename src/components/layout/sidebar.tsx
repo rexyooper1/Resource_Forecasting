@@ -11,6 +11,7 @@ import {
   Settings,
   ChevronDown,
   Briefcase,
+  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { UserRole } from "@/types";
@@ -22,6 +23,7 @@ const navigation = [
   { name: "Demand", href: "/demand", icon: ClipboardList, roles: ["eng_manager"] as UserRole[] },
   { name: "Employees", href: "/employees", icon: Users, roles: ["eng_manager"] as UserRole[] },
   { name: "Matching", href: "/matching", icon: Puzzle, roles: ["eng_manager"] as UserRole[] },
+  { name: "AI Advisor", href: "/ai", icon: Sparkles, roles: ["eng_manager"] as UserRole[] },
   { name: "Settings", href: "/settings", icon: Settings, roles: ["eng_manager"] as UserRole[] },
 ];
 

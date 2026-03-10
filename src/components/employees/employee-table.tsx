@@ -21,11 +21,6 @@ interface EmployeeTableProps {
 }
 
 export function EmployeeTable({ employees, lcats, assignments }: EmployeeTableProps) {
-  const getLCATName = (lcatId: string) => {
-    const lcat = lcats.find((l) => l.id === lcatId);
-    return lcat ? lcat.name : "Unknown";
-  };
-
   const getAvailabilityColor = (percent: number) => {
     if (percent >= 75) return "bg-green-600";
     if (percent >= 25) return "bg-yellow-600";

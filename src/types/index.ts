@@ -1,12 +1,15 @@
 export type ProjectStatus = "preliminary" | "proposal_submitted" | "awarded" | "staffed" | "lost";
 export type UserRole = "bd_manager" | "eng_manager" | "engineer";
 
+export type ProjectPriority = "high" | "medium" | "low";
+
 export interface Project {
   id: string;
   name: string;
   client: string;
   description: string;
   status: ProjectStatus;
+  priority?: ProjectPriority;
   winProbability: number;
   periodOfPerformance: {
     startDate: string;

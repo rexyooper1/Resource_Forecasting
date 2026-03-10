@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import type { Project, LCAT, Skill } from "@/types";
+import type { Project, LCAT, Skill, ProjectPriority } from "@/types";
 import type { ProjectFormData } from "@/actions/projects";
 import { createProject, updateProject } from "@/actions/projects";
 import {
@@ -37,6 +37,7 @@ export function ProjectForm({ project, lcats, skills }: ProjectFormProps) {
   const [client, setClient] = useState(project?.client ?? "");
   const [description, setDescription] = useState(project?.description ?? "");
   const [status, setStatus] = useState(project?.status ?? "preliminary");
+  const [priority, setPriority] = useState<ProjectPriority>(project?.priority ?? "medium");
   const [winProbability, setWinProbability] = useState(
     project?.winProbability ?? 50
   );
@@ -65,6 +66,7 @@ export function ProjectForm({ project, lcats, skills }: ProjectFormProps) {
         client,
         description,
         status,
+        priority,
         winProbability,
         startDate,
         endDate,
@@ -136,6 +138,20 @@ export function ProjectForm({ project, lcats, skills }: ProjectFormProps) {
                 <SelectItem value="awarded">Awarded</SelectItem>
                 <SelectItem value="staffed">Staffed</SelectItem>
                 <SelectItem value="lost">Lost</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="priority">Priority</Label>
+            <Select value={priority} onValueChange={(value) => setPriority(value as ProjectPriority)}>
+              <SelectTrigger id="priority">
+                <SelectValue placeholder="Select priority" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="high">High</SelectItem>
+                <SelectItem value="medium">Medium</SelectItem>
+                <SelectItem value="low">Low</SelectItem>
               </SelectContent>
             </Select>
           </div>
