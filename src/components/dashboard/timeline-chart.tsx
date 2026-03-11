@@ -65,6 +65,29 @@ export function TimelineChart({ projects, lcats, employees, assignments }: Timel
     months.push(addMonths(startOfMonth(now), i));
   }
 
+  // Compute max stacked demand across all months to set Y-axis domain
+  const maxDemand = months.reduce((max, month) => {
+    const monthStart = startOfMonth(month);
+    const monthEnd = endOfMonth(month);
+    let total = 0;
+    usedLcats.forEach((lcat) => {
+      activeProjects.forEach((project) => {
+        const popStart = parseISO(project.periodOfPerformance.startDate);
+        const popEnd = parseISO(project.periodOfPerformance.endDate);
+        if (popStart <= monthEnd && popEnd >= monthStart) {
+          project.lcatRequirements.forEach((req) => {
+            if (req.lcatId === lcat.id) {
+              total += req.fteCount * (project.winProbability / 100);
+            }
+          });
+        }
+      });
+    });
+    return Math.max(max, total);
+  }, 0);
+
+  const yAxisMax = Math.ceil(Math.max(maxDemand, totalCapacity) * 1.1);
+
   const chartData = months.map((month) => {
     const monthStart = startOfMonth(month);
     const monthEnd = endOfMonth(month);
@@ -123,7 +146,7 @@ export function TimelineChart({ projects, lcats, employees, assignments }: Timel
                 tick={{ fill: "#888", fontSize: 12 }}
                 stroke="#888"
               />
-              <YAxis tick={{ fill: "#888" }} stroke="#888" />
+              <YAxis tick={{ fill: "#888" }} stroke="#888" domain={[0, yAxisMax]} />
               <Tooltip
                 contentStyle={{
                   backgroundColor: "#1f2937",
