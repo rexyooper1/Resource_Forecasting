@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { createAssignment } from "@/actions/assignments";
 import type { Recommendation } from "@/app/api/ai/recommendations/route";
@@ -18,13 +18,15 @@ const priorityColors: Record<string, string> = {
 
 export function RecommendationsPanel() {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [ran, setRan] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [assigning, setAssigning] = useState<string | null>(null);
 
   const fetchRecommendations = async () => {
     setLoading(true);
     setError(null);
+    setRan(true);
     try {
       const res = await fetch("/api/ai/recommendations", { method: "POST" });
       if (!res.ok) throw new Error("Failed to fetch");
@@ -36,10 +38,6 @@ export function RecommendationsPanel() {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchRecommendations();
-  }, []);
 
   const handleAssign = async (rec: Recommendation) => {
     setAssigning(rec.lcatRequirementId);
@@ -63,7 +61,7 @@ export function RecommendationsPanel() {
         <h2 className="text-lg font-semibold text-foreground">Portfolio Recommendations</h2>
         <Button variant="outline" size="sm" onClick={fetchRecommendations} disabled={loading}>
           <RefreshCw className={`h-3.5 w-3.5 mr-1.5 ${loading ? "animate-spin" : ""}`} />
-          Refresh
+          {ran ? "Refresh" : "Analyze Portfolio"}
         </Button>
       </div>
 
@@ -90,7 +88,15 @@ export function RecommendationsPanel() {
         </Card>
       )}
 
-      {!loading && !error && recommendations.length === 0 && (
+      {!loading && !ran && (
+        <Card>
+          <CardContent className="pt-6 text-sm text-muted-foreground">
+            Click <span className="text-foreground font-medium">Analyze Portfolio</span> to generate AI-powered staffing recommendations.
+          </CardContent>
+        </Card>
+      )}
+
+      {!loading && ran && !error && recommendations.length === 0 && (
         <Card>
           <CardContent className="pt-6 text-sm text-muted-foreground">
             No unassigned requirements found. All active projects are fully staffed.

@@ -30,10 +30,10 @@ Rules:
 - Prefer employees with higher availability
 - Prefer employees with more matching skills
 - Do not recommend employees already assigned to the same LCAT requirement
-- Focus on preliminary and proposal_submitted projects (pre-award)
+- Focus on preliminary, proposal_submitted, and awarded projects
 - Prioritize high-priority projects, then by win probability
 
-Return a JSON array of recommendation objects. Each object must have these exact fields:
+Return a JSON object with a single key "recommendations" containing an array of recommendation objects. Each object must have these exact fields:
 {
   "projectId": string,
   "projectName": string,
@@ -43,13 +43,10 @@ Return a JSON array of recommendation objects. Each object must have these exact
   "recommendedEmployeeId": string,
   "employeeName": string,
   "rationale": string (1-2 sentences explaining the recommendation),
-  "availabilityPct": number (0-100),
-  "skillMatchCount": number,
-  "totalSkillsRequired": number,
   "winProbability": number
 }
 
-Return only the JSON array, no other text.`;
+Example format: {"recommendations": [{...}, {...}]}`;
 
 export async function POST() {
   try {
@@ -64,11 +61,11 @@ export async function POST() {
     const skillMap = new Map(skills.map((s) => [s.id, s.name]));
 
     // Build unassigned requirements context for the prompt
-    const preAwardStatuses = ["preliminary", "proposal_submitted"];
+    const activeStatuses = ["preliminary", "proposal_submitted", "awarded"];
     const unassignedLines: string[] = [];
 
     for (const project of projects) {
-      if (!preAwardStatuses.includes(project.status)) continue;
+      if (!activeStatuses.includes(project.status)) continue;
       for (const req of project.lcatRequirements) {
         const reqAssignments = assignments.filter(
           (a) => a.projectId === project.id && a.lcatRequirementId === req.id
@@ -80,9 +77,12 @@ export async function POST() {
         const lcatName = lcatMap.get(req.lcatId) ?? req.lcatId;
         const reqSkills = req.requiredSkills.map((sid) => skillMap.get(sid) ?? sid);
 
-        // Find eligible employees
+        // Find eligible employees with availability > 0%
         const eligible = employees.filter(
-          (e) => e.lcatId === req.lcatId && !assignedEmployeeIds.has(e.id)
+          (e) =>
+            e.lcatId === req.lcatId &&
+            !assignedEmployeeIds.has(e.id) &&
+            getCurrentAvailabilityFte(e.id, assignments) > 0
         );
 
         unassignedLines.push(
@@ -125,6 +125,29 @@ export async function POST() {
     } else {
       recommendations = [];
     }
+
+    // Build lookup: requirementId → { requiredSkills: Set, project }
+    const reqLookup = new Map<string, { requiredSkills: Set<string>; project: typeof projects[0] }>();
+    for (const project of projects) {
+      for (const req of project.lcatRequirements) {
+        reqLookup.set(req.id, { requiredSkills: new Set(req.requiredSkills), project });
+      }
+    }
+    const employeeMap = new Map(employees.map((e) => [e.id, e]));
+
+    // Overwrite skill/availability fields with server-computed values
+    recommendations = recommendations.map((rec) => {
+      const emp = employeeMap.get(rec.recommendedEmployeeId);
+      const lookup = reqLookup.get(rec.lcatRequirementId);
+      const totalSkillsRequired = lookup ? lookup.requiredSkills.size : 0;
+      const skillMatchCount = emp && lookup
+        ? emp.skills.filter((sid) => lookup.requiredSkills.has(sid)).length
+        : 0;
+      const availabilityPct = emp
+        ? Math.round(getCurrentAvailabilityFte(emp.id, assignments) * 100)
+        : 0;
+      return { ...rec, skillMatchCount, totalSkillsRequired, availabilityPct };
+    });
 
     // Sort: high → medium → low, then by win probability descending
     const priorityOrder: Record<string, number> = { high: 0, medium: 1, low: 2 };

@@ -58,7 +58,7 @@
       {
         "id": "req-4",
         "lcatId": "lcat-2",
-        "fteCount": 3,
+        "fteCount": 2,
         "requiredSkills": [
           "skill-9",
           "skill-10",
@@ -77,7 +77,8 @@
       }
     ],
     "createdAt": "2025-02-01T09:00:00Z",
-    "updatedAt": "2025-02-01T09:00:00Z"
+    "updatedAt": "2026-03-11T00:49:36.225Z",
+    "priority": "medium"
   },
   {
     "id": "proj-3",
@@ -122,7 +123,7 @@
     "client": "NASA Goddard",
     "description": "Upgrade of satellite ground station electronics including antenna feed systems, signal processing hardware, and power conditioning.",
     "status": "proposal_submitted",
-    "winProbability": 55,
+    "winProbability": 72,
     "periodOfPerformance": {
       "startDate": "2025-10-01",
       "endDate": "2026-09-30"
@@ -158,7 +159,7 @@
       }
     ],
     "createdAt": "2024-12-10T11:00:00Z",
-    "updatedAt": "2025-01-28T16:30:00Z"
+    "updatedAt": "2026-03-10T21:44:52.989Z"
   },
   {
     "id": "proj-5",
