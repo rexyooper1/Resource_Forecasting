@@ -33,7 +33,7 @@ export function RecommendationsPanel() {
       const data = await res.json();
       setRecommendations(data);
     } catch {
-      setError("Failed to load recommendations. Check your API key and try again.");
+      setError("Failed to load recommendations. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -91,7 +91,7 @@ export function RecommendationsPanel() {
       {!loading && !ran && (
         <Card>
           <CardContent className="pt-6 text-sm text-muted-foreground">
-            Click <span className="text-foreground font-medium">Analyze Portfolio</span> to generate AI-powered staffing recommendations.
+            Click <span className="text-foreground font-medium">Analyze Portfolio</span> to generate staffing recommendations.
           </CardContent>
         </Card>
       )}
