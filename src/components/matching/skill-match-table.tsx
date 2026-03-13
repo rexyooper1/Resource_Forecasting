@@ -145,8 +145,13 @@ export function SkillMatchTable({
       {selectedProject &&
         selectedProject.lcatRequirements.map((requirement) => {
           const isExpanded = expandedRequirements.has(requirement.id);
-          const matches = matchEmployeesToRequirement(employees, requirement);
-          const gaps = getSkillGaps(employees, requirement);
+          const lcatEmployees = employees.filter((e) => e.lcatId === requirement.lcatId);
+          const matches = matchEmployeesToRequirement(lcatEmployees, requirement).sort(
+            (a, b) =>
+              getCurrentAvailabilityFte(b.employee.id, assignments) -
+              getCurrentAvailabilityFte(a.employee.id, assignments)
+          );
+          const gaps = getSkillGaps(lcatEmployees, requirement);
           const assignedCount = getAssignedCount(requirement.id);
           const isFullyStaffed = assignedCount >= Math.ceil(requirement.fteCount);
 
@@ -180,7 +185,7 @@ export function SkillMatchTable({
 
               {isExpanded && (
                 <CardContent>
-                  {employees.length === 0 ? (
+                  {lcatEmployees.length === 0 ? (
                     <p className="text-sm text-muted-foreground">
                       No employees available for matching.
                     </p>
@@ -189,7 +194,6 @@ export function SkillMatchTable({
                       <TableHeader>
                         <TableRow>
                           <TableHead>Employee</TableHead>
-                          <TableHead>LCAT Match</TableHead>
                           <TableHead>Skills Matched</TableHead>
                           <TableHead>Match Score</TableHead>
                           <TableHead>Matched Skills</TableHead>
@@ -218,17 +222,6 @@ export function SkillMatchTable({
                                     {availabilityPct}% available
                                   </span>
                                 </div>
-                              </TableCell>
-                              <TableCell>
-                                {match.lcatMatch ? (
-                                  <span className="text-green-600 font-bold">
-                                    &#10003;
-                                  </span>
-                                ) : (
-                                  <span className="text-red-500 font-bold">
-                                    &#10005;
-                                  </span>
-                                )}
                               </TableCell>
                               <TableCell>
                                 {match.totalRequiredSkills > 0
