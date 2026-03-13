@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import type { LCAT, Skill } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,6 +33,8 @@ export function LCATRequirementForm({
   requirements,
   onChange,
 }: LCATRequirementFormProps) {
+  const [openPickerIndex, setOpenPickerIndex] = useState<number | null>(null);
+
   const addRequirement = () => {
     onChange([
       ...requirements,
@@ -142,23 +145,74 @@ export function LCATRequirementForm({
           </div>
 
           <div className="space-y-2">
-            <Label>Required Skills</Label>
-            <div className="flex flex-wrap gap-2">
-              {skills.map((skill) => (
-                <label
-                  key={skill.id}
-                  className="flex items-center gap-1.5 text-sm"
+            <div className="flex items-center justify-between">
+              <Label>Required Skills</Label>
+              {openPickerIndex !== index ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setOpenPickerIndex(index)}
                 >
-                  <input
-                    type="checkbox"
-                    checked={req.requiredSkills.includes(skill.id)}
-                    onChange={() => toggleSkill(index, skill.id)}
-                    className="rounded border-input"
-                  />
-                  <span>{skill.name}</span>
-                </label>
-              ))}
+                  <Plus className="mr-1 h-4 w-4" />
+                  Add Skill
+                </Button>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Select
+                    onValueChange={(skillId) => {
+                      toggleSkill(index, skillId);
+                      setOpenPickerIndex(null);
+                    }}
+                  >
+                    <SelectTrigger className="w-48">
+                      <SelectValue placeholder="Select skill..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {skills
+                        .filter((s) => !req.requiredSkills.includes(s.id))
+                        .map((s) => (
+                          <SelectItem key={s.id} value={s.id}>
+                            {s.name}
+                          </SelectItem>
+                        ))}
+                    </SelectContent>
+                  </Select>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setOpenPickerIndex(null)}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              )}
             </div>
+
+            {req.requiredSkills.length === 0 ? (
+              <p className="text-xs text-muted-foreground">No skills required.</p>
+            ) : (
+              <div className="rounded border border-border divide-y divide-border">
+                {req.requiredSkills.map((skillId) => {
+                  const skillName = skills.find((s) => s.id === skillId)?.name ?? skillId;
+                  return (
+                    <div key={skillId} className="flex items-center justify-between px-3 py-1.5 text-sm">
+                      <span>{skillName}</span>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6"
+                        onClick={() => toggleSkill(index, skillId)}
+                      >
+                        <X className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       ))}
